@@ -40,6 +40,7 @@ function Sidebar() {
       )
     );
   }, []);
+
   return (
     <div className="sidebar">
       <div className="sidebar__header">

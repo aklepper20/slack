@@ -12,10 +12,8 @@ function App() {
         <div className="app__body">
           <Sidebar />
           <Routes>
-            <Route path="/rooms/:roomId" element={<Chat />} />
+            <Route path="/room/:roomId" element={<Chat />} />
             <Route path="/" element={<Chat />} />
-
-            {/* <Route path="/" element={<Chat />} /> */}
           </Routes>
         </div>
       </Router>

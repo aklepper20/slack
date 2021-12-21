@@ -1,11 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/SidebarOption.css";
+import db from "../firebase";
 
 function SidebarOption({ Icon, title, id, addChannelOption }) {
   const navigation = useNavigate();
 
   const selectChannel = () => {
+    //gets and pushes the id of the chat into the url bar, so we can go fetch the data from the specific room id
     if (id) {
       navigation(`/room/${id}`);
     } else {
@@ -13,7 +15,16 @@ function SidebarOption({ Icon, title, id, addChannelOption }) {
     }
   };
 
-  const addChannel = () => {};
+  const addChannel = () => {
+    const channelName = prompt("Please enter the channel name...");
+
+    if (channelName) {
+      db.collection("rooms").add({
+        name: channelName,
+      });
+    }
+  };
+
   return (
     <div
       className="sidebarOption"
