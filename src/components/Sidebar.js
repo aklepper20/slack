@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Sidebar.css";
 import SidebarOption from "./SidebarOption";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
@@ -11,6 +11,10 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import AppsIcon from "@mui/icons-material/Apps";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AddIcon from "@mui/icons-material/Add";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import db from "../firebase";
 
 const sidebarObj = [
   { Icon: InsertCommentIcon, title: "Threads" },
@@ -22,7 +26,20 @@ const sidebarObj = [
   { Icon: FileCopyIcon, title: "File browser" },
   { Icon: ExpandLessIcon, title: "Show less" },
 ];
+
 function Sidebar() {
+  const [channels, setChannels] = useState([]);
+
+  useEffect(() => {
+    db.collection("rooms").onSnapshot((snapshot) =>
+      setChannels(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          name: doc.data().name,
+        }))
+      )
+    );
+  }, []);
   return (
     <div className="sidebar">
       <div className="sidebar__header">
@@ -38,7 +55,13 @@ function Sidebar() {
       {sidebarObj.map((obj, index) => (
         <SidebarOption key={index} Icon={obj.Icon} title={obj.title} />
       ))}
-      {/* <SidebarOption Icon={InsertCommentIcon} title="Threads" /> */}
+      <hr></hr>
+      <SidebarOption Icon={ExpandMoreIcon} title="Channels" />
+      <hr></hr>
+      <SidebarOption Icon={AddIcon} title="Add channel" />
+      {channels.map((channel) => (
+        <SidebarOption title={channel.name} id={channel.id} />
+      ))}
     </div>
   );
 }

@@ -14,6 +14,7 @@ function SidebarOption({ Icon, title }) {
       )}
     </div>
   );
+  <hr />;
 }
 
 export default SidebarOption;
