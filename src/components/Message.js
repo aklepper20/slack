@@ -1,8 +1,8 @@
 import React from "react";
 import "../css/Message.css";
+import { useStateValue } from "../StateProvider";
 
 function Message({ message, timestamp, user, userImage }) {
-  console.log(timestamp);
   return (
     <div className="message">
       <img src={userImage} alt={user} />

@@ -6,6 +6,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { useParams } from "react-router-dom";
 import db from "../firebase";
 import Message from "./Message";
+import ChatInput from "./ChatInput";
 
 function Chat() {
   const [roomDetails, setRoomDetails] = useState(null);
@@ -54,6 +55,7 @@ function Chat() {
           />
         ))}
       </div>
+      <ChatInput channelName={roomDetails?.name} channelId={roomId} />
     </div>
   );
 }
