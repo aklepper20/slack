@@ -6,6 +6,10 @@ import db from "../firebase";
 function SidebarOption({ Icon, title, id, addChannelOption }) {
   const navigation = useNavigate();
 
+  //1. changes url
+  //2. connects to the db
+  //3. uses to url para(roomid) to fetch room details from the db
+
   const selectChannel = () => {
     //gets and pushes the id of the chat into the url bar, so we can go fetch the data from the specific room id
     if (id) {
